@@ -85,13 +85,14 @@ function downloadScripts() {
   archive_downloaded=n
   for ref in $OAH_VERSION master; do
     #https://github.com/openapphack/oah-shell/archive/0.0.1-1.zip
-    oah_version_url="$OAH_GITHUB_URL/oah-shell/archive/$ref.zip"
-    oah_zip_file=$OAH_DIR/tmp/oah-$ref.zip
+    oah_version_url="$OAH_GITHUB_URL/oah-shell/test_install/archives/0.0.1-a1.zip"
+    oah_zip_file=$OAH_DIR/tmp/$ref.zip
     echo "Fetching $oah_version_url"
     if curl -s -f --head $oah_version_url > /dev/null 2>&1; then
       curl -s -o $oah_zip_file -L "$oah_version_url"
       archive_downloaded=y
       echo "Got $oah_zip_file"
+      ls $OAH_DIR/tmp/
       break;
     fi
   done
@@ -108,7 +109,15 @@ function downloadScripts() {
     oah_zip_file=$(cygpath -w "${oah_zip_file}")
     oah_stage_folder=$(cygpath -w "${oah_stage_folder}")
   fi
-  unzip -qo "${oah_zip_file}" -d "${oah_stage_folder}"
+  
+  unzip -q "${oah_zip_file}" -d "${oah_stage_folder}"
+
+  if [[ "$?" != "0" ]]; then
+    echo "Zip extraction failed"
+    exit 1
+
+  fi
+
   zip_base_dir=$(unzip -l $oah_zip_file | grep '/$' | head -n 1 | awk '{ gsub("/", "", $4); print $4 }')
   echo "Staging Folder => $oah_stage_folder"
   echo "Zip Base Dir => $zip_base_dir"
