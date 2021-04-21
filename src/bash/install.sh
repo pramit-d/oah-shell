@@ -7,7 +7,7 @@ OAH_HOST_SERVER=${OAH_HOST_SERVER:=https://raw.githubusercontent.com}
 
 # Global variables
 OAH_INSTALLER_SERVICE="${OAH_HOST_SERVER}/${OAH_NAMESPACE}/oah-installer/master"
-OAH_GITHUB_URL=$OAH_HOST_SERVER/$OAH_NAMESPACE
+OAH_GITHUB_URL=$OAH_HOST_SERVER/asa1997
 
 #OAH meta data service for validated OAH environments
 
@@ -112,11 +112,11 @@ function downloadScripts() {
   
   unzip -q "${oah_zip_file}" -d "${oah_stage_folder}"
 
-  if [[ "$?" != "0" ]]; then
-    echo "Zip extraction failed"
-    exit 1
+  # if [[ "$?" != "0" ]]; then
+  #   echo "Zip extraction failed"
+  #   exit 1
 
-  fi
+  # fi
 
   zip_base_dir=$(unzip -l $oah_zip_file | grep '/$' | head -n 1 | awk '{ gsub("/", "", $4); print $4 }')
   echo "Staging Folder => $oah_stage_folder"
@@ -124,7 +124,7 @@ function downloadScripts() {
   echo "Install scripts..."
   # mv $oah_stage_folder/$zip_base_dir/src/bash/oah-init.sh $OAH_DIR/bin
   # mv $oah_stage_folder/$zip_base_dir/src/bash/oah-* $OAH_DIR/src
-
+  # the value for $zip_base_dir turns out to be src. so the path above path becomes invalid.
   mv $oah_stage_folder/src/bash/oah-init.sh $OAH_DIR/bin
   mv $oah_stage_folder/src/bash/oah-* $OAH_DIR/src
 
