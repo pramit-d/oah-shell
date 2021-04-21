@@ -7,7 +7,7 @@ OAH_HOST_SERVER=${OAH_HOST_SERVER:=https://raw.githubusercontent.com}
 
 # Global variables
 OAH_INSTALLER_SERVICE="${OAH_HOST_SERVER}/${OAH_NAMESPACE}/oah-installer/master"
-OAH_GITHUB_URL=http://github.com/$OAH_NAMESPACE
+OAH_GITHUB_URL=$OAH_HOST_SERVER/$OAH_NAMESPACE
 
 #OAH meta data service for validated OAH environments
 
@@ -86,7 +86,7 @@ function downloadScripts() {
   for ref in $OAH_VERSION master; do
     #https://github.com/openapphack/oah-shell/archive/0.0.1-1.zip
     oah_version_url="$OAH_GITHUB_URL/oah-shell/test_install/archives/0.0.1-a1.zip"
-    oah_zip_file=$OAH_DIR/tmp/$ref.zip
+    oah_zip_file=$OAH_DIR/tmp/oah-$ref.zip
     echo "Fetching $oah_version_url"
     if curl -s -f --head $oah_version_url > /dev/null 2>&1; then
       curl -s -o $oah_zip_file -L "$oah_version_url"
@@ -122,8 +122,12 @@ function downloadScripts() {
   echo "Staging Folder => $oah_stage_folder"
   echo "Zip Base Dir => $zip_base_dir"
   echo "Install scripts..."
-  mv $oah_stage_folder/$zip_base_dir/src/bash/oah-init.sh $OAH_DIR/bin
-  mv $oah_stage_folder/$zip_base_dir/src/bash/oah-* $OAH_DIR/src
+  # mv $oah_stage_folder/$zip_base_dir/src/bash/oah-init.sh $OAH_DIR/bin
+  # mv $oah_stage_folder/$zip_base_dir/src/bash/oah-* $OAH_DIR/src
+
+  mv $oah_stage_folder/src/bash/oah-init.sh $OAH_DIR/bin
+  mv $oah_stage_folder/src/bash/oah-* $OAH_DIR/src
+
   rm -fr $oah_stage_folder/$zip_base_dir >/dev/null 2>&1
 }
 
