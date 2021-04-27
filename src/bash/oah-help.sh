@@ -4,7 +4,7 @@
 
 function __oah_help {
 	cat <<EOF
-Install with ove:
+Install with oah:
 Usage:  oah install [option(-v,-d,-s)] {imagename}
  Options
  -v vagrant // will be used for testing and creation of cluster
@@ -41,6 +41,9 @@ oah provision
 
 Halt a guest:
 oah halt
+
+Switch between two environments
+oah use {imagename}
 
 EOF
 }
