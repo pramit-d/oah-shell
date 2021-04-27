@@ -1,13 +1,13 @@
 #!/bin/bash
 
-OAH_NAMESPACE=${OAH_NAMESPACE:=openapphack}
+OAH_NAMESPACE=${OAH_NAMESPACE:=Be-Secure}
 OAH_ROOT=${OAH_ROOT:="$HOME"}
 OAH_DIR="$OAH_ROOT/.oah"
 OAH_HOST_SERVER=${OAH_HOST_SERVER:=https://raw.githubusercontent.com}
 
 # Global variables
 OAH_INSTALLER_SERVICE="${OAH_HOST_SERVER}/${OAH_NAMESPACE}/oah-installer/master"
-OAH_GITHUB_URL=http://github.com/$OAH_NAMESPACE
+OAH_GITHUB_URL=$OAH_HOST_SERVER/$OAH_NAMESPACE
 
 #OAH meta data service for validated OAH environments
 
@@ -77,27 +77,45 @@ EOF
       exit 0
   fi
 }
-
+# Function removes the installed folder structure if the installation failed midway.
+function remove_installation
+{
+  echo "Removing $OAH_DIR..."
+  [[ -d $OAH_DIR ]] && rm -rf $OAH_DIR
+  echo "Removed successfully"
+}
 
 function downloadScripts() {
   echo "Download script archive..."
 
   archive_downloaded=n
-  for ref in $OAH_VERSION master; do
-    #https://github.com/openapphack/oah-shell/archive/0.0.1-1.zip
-    oah_version_url="$OAH_GITHUB_URL/oah-shell/archive/$ref.zip"
-    oah_zip_file=$OAH_DIR/tmp/oah-$ref.zip
-    echo "Fetching $oah_version_url"
-    if curl -s -f --head $oah_version_url > /dev/null 2>&1; then
-      curl -s -o $oah_zip_file -L "$oah_version_url"
-      archive_downloaded=y
-      echo "Got $oah_zip_file"
-      break;
-    fi
-  done
+  # for ref in $OAH_VERSION master; do
+  #   #https://github.com/openapphack/oah-shell/archive/0.0.1-1.zip
+  #   oah_version_url="$OAH_GITHUB_URL/oah-shell/test_install/archives/0.0.1-a1.zip"
+  #   oah_zip_file=$OAH_DIR/tmp/oah-$ref.zip
+  #   echo "Fetching $oah_version_url"
+  #   if curl -s -f --head $oah_version_url > /dev/null 2>&1; then
+  #     curl -s -o $oah_zip_file -L "$oah_version_url"
+  #     archive_downloaded=y
+  #     echo "Got $oah_zip_file"
+  #     ls $OAH_DIR/tmp/
+  #     break;
+  #   fi
+  # done
+
+  #https://github.com/openapphack/oah-shell/archive/0.0.1-1.zip
+  oah_version_url="$OAH_GITHUB_URL/oah-shell/master/archives/$OAH_VERSION.zip"
+  oah_zip_file=$OAH_DIR/tmp/oah-$OAH_VERSION.zip
+  echo "Fetching $oah_version_url"
+  if curl -s -f --head $oah_version_url > /dev/null 2>&1; then
+    curl -s -o $oah_zip_file -L "$oah_version_url"
+    archive_downloaded=y
+    echo "Got $oah_zip_file"
+  fi
 
   if [ $archive_downloaded == "n" ]; then
     echo 'Failed to download script archive. Please check your network connectivity'
+    remove_installation
     exit 1
   fi
 
@@ -108,13 +126,24 @@ function downloadScripts() {
     oah_zip_file=$(cygpath -w "${oah_zip_file}")
     oah_stage_folder=$(cygpath -w "${oah_stage_folder}")
   fi
-  unzip -qo "${oah_zip_file}" -d "${oah_stage_folder}"
+  
+  unzip -q "${oah_zip_file}" -d "${oah_stage_folder}"
+
+  if [[ "$?" != "0" ]]; then
+    echo "Zip extraction unsuccessfull"
+    remove_installation
+  fi
+
   zip_base_dir=$(unzip -l $oah_zip_file | grep '/$' | head -n 1 | awk '{ gsub("/", "", $4); print $4 }')
   echo "Staging Folder => $oah_stage_folder"
   echo "Zip Base Dir => $zip_base_dir"
   echo "Install scripts..."
-  mv $oah_stage_folder/$zip_base_dir/src/bash/oah-init.sh $OAH_DIR/bin
-  mv $oah_stage_folder/$zip_base_dir/src/bash/oah-* $OAH_DIR/src
+  # mv $oah_stage_folder/$zip_base_dir/src/bash/oah-init.sh $OAH_DIR/bin
+  # mv $oah_stage_folder/$zip_base_dir/src/bash/oah-* $OAH_DIR/src
+  # the value for $zip_base_dir turns out to be src. so the above two paths becomes invalid.
+  mv $oah_stage_folder/src/bash/oah-init.sh $OAH_DIR/bin
+  mv $oah_stage_folder/src/bash/oah-* $OAH_DIR/src
+
   rm -fr $oah_stage_folder/$zip_base_dir >/dev/null 2>&1
 }
 

@@ -4,12 +4,12 @@
 
 function __oah_help {
 	cat <<EOF
-Install with ove:
+Install with oah:
 Usage:  oah install [option(-v,-d,-s)] {imagename}
  Options
  -v vagrant // will be used for testing and creation of cluster
 
--s standalone machine / will make use of localhost as inventory
+ -s standalone machine / will make use of localhost as inventory
 
   Example : To Install Drupal8  on a Windows host with vagrant and Virtualbox:
  oah install -v oah-drupal8-vm
@@ -41,6 +41,9 @@ oah provision
 
 Halt a guest:
 oah halt
+
+Switch between two environments
+oah use {imagename}
 
 EOF
 }
