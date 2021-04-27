@@ -1,5 +1,5 @@
 # oah-shell
-Shell for openapphack
+Shell for Be-Secure
 
 # Installation
 

@@ -91,8 +91,8 @@ function __oah_install_candidate_version {
 	# version defaults to master if no tag is giving
 	VERSION="${2:=master}"
 
-	OAH_GIT_URL="http://github.com/openapphack/"
-	CANDIDATE_GIT_REPO_URL="${3:="http://github.com/openapphack/"}"
+	OAH_GIT_URL="http://github.com/Be-Secure/"
+	CANDIDATE_GIT_REPO_URL="${3:="http://github.com/Be-Secure/"}"
 	echo "Installing: ${CANDIDATE} ${VERSION}"
 
   CANDIDATE_ENV_LOCATION="${OAH_DIR}/.envs/${CANDIDATE}/${VERSION}"

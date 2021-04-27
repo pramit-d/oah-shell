@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export OAH_NAMESPACE=${OAH_NAMESPACE:=openapphack}
+export OAH_NAMESPACE=${OAH_NAMESPACE:=Be-Secure}
 export OAH_ROOT=${OAH_ROOT:="$HOME"}
 export OAH_DIR="$OAH_ROOT/.oah"
 export OAH_HOST_SERVER=${OAH_HOST_SERVER:=https://raw.githubusercontent.com}
