@@ -90,7 +90,7 @@ function downloadScripts() {
 
   archive_downloaded=n
   # for ref in $OAH_VERSION master; do
-  #   #https://github.com/openapphack/oah-shell/archive/0.0.1-1.zip
+  #   #https://github.com/Be-Secure/oah-shell/archive/0.0.1-1.zip
   #   oah_version_url="$OAH_GITHUB_URL/oah-shell/test_install/archives/0.0.1-a1.zip"
   #   oah_zip_file=$OAH_DIR/tmp/oah-$ref.zip
   #   echo "Fetching $oah_version_url"
@@ -103,7 +103,7 @@ function downloadScripts() {
   #   fi
   # done
 
-  #https://github.com/openapphack/oah-shell/archive/0.0.1-1.zip
+  #https://github.com/Be-Secure/oah-shell/archive/0.0.1-1.zip
   oah_version_url="$OAH_GITHUB_URL/oah-shell/master/archives/$OAH_VERSION.zip"
   oah_zip_file=$OAH_DIR/tmp/oah-$OAH_VERSION.zip
   echo "Fetching $oah_version_url"
@@ -336,7 +336,7 @@ EOF
 # echo "oah_insecure_ssl=false" >> "${oah_config_file}"
 
 echo "Download script archive..."
-#https://github.com/openapphack/oah/raw/gh-pages/
+#https://github.com/Be-Secure/oah/raw/gh-pages/
 # curl -s "${OAH_INSTALLER_SERVICE}/res/oah-cli-scripts.zip" > "${oah_zip_file}"
 
 # TODO if release not found set OAH_SRC and install from source

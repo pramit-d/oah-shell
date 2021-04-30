@@ -14,13 +14,13 @@
 # echo "Updating oah..."
 # # Global variables
 # #OAH_INSTALLER_SERVICE="@OAH_INSTALLER_SERVICE@"
-# # OAH_INSTALLER_SERVICE="https://raw.githubusercontent.com/openapphack/oah-installer/"
+# # OAH_INSTALLER_SERVICE="https://raw.githubusercontent.com/Be-Secure/oah-installer/"
 # # #sOAH meta data service for validated OAH environments
 # # #OAH_ENVS_INFO_SERVICE="@OAH_ENVS_INFO_SERVICE@"
 # #
-# # OAH_ENVS_INFO_SERVICE="https://raw.githubusercontent.com/openapphack/oah-installer/master/envsinfo/candidates.txt"
+# # OAH_ENVS_INFO_SERVICE="https://raw.githubusercontent.com/Be-Secure/oah-installer/master/envsinfo/candidates.txt"
 # # #OAH_BROADCAST_SERVICE="@OAH_BROADCAST_SERVICE@"
-# # OAH_BROADCAST_SERVICE="https://raw.githubusercontent.com/openapphack/oah-installer/master/broadcast/"
+# # OAH_BROADCAST_SERVICE="https://raw.githubusercontent.com/Be-Secure/oah-installer/master/broadcast/"
 # # #OAH_VERSION=0.0.1a1
 # # OAH_VERSION="0.0.1a1"
 # # OAH_DIR="$HOME/.oah"
@@ -33,7 +33,7 @@
 # # 	OAH_DIR="$HOME/.oah"
 # # fi
 #
-# OAH_NAMESPACE=${OAH_NAMESPACE:=openapphack}
+# OAH_NAMESPACE=${OAH_NAMESPACE:=Be-Secure}
 # OAH_ROOT=${OAH_ROOT:="$HOME"}
 # OAH_DIR="$OAH_ROOT/.oah"
 # OAH_HOST_SERVER=${OAH_HOST_SERVER:=https://raw.githubusercontent.com}
