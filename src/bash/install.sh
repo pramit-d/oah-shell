@@ -55,7 +55,7 @@ case "$(uname)" in
 esac
 
 echo '                                                                     '
-echo 'Thanks for using     OpenAppHack(OAH SHELL)                          '
+echo 'Thanks for using     Be-Secure(OAH SHELL)                            '
 echo '                                                                     '
 echo '                                                                     '
 echo '                                       Will now attempt installing...'
