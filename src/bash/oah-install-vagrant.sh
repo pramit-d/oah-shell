@@ -70,6 +70,6 @@ function __oah_install_vagrant() {
       fi
     fi
   fi
-  vagrant up
+  sudo vagrant up --provider virtualbox
   popd
 }
