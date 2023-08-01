@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OAH_NAMESPACE=${OAH_NAMESPACE:=Be-Secure}
+OAH_NAMESPACE=${OAH_NAMESPACE:=pramit-d}
 OAH_ROOT=${OAH_ROOT:="$HOME"}
 OAH_DIR="$OAH_ROOT/.oah"
 OAH_HOST_SERVER=${OAH_HOST_SERVER:=https://raw.githubusercontent.com}
@@ -107,7 +107,7 @@ function downloadScripts() {
   oah_version_url="$OAH_GITHUB_URL/oah-shell/master/archives/$OAH_VERSION.zip"
   oah_zip_file=$OAH_DIR/tmp/oah-$OAH_VERSION.zip
   echo "Fetching $oah_version_url"
-  if curl -s -f --head $oah_version_url > /dev/null 2>&1; then
+  if curl -s -f --head $oah_version_url -k > /dev/null 2>&1; then
     curl -s -o $oah_zip_file -L "$oah_version_url"
     archive_downloaded=y
     echo "Got $oah_zip_file"
