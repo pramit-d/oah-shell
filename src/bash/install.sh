@@ -4,6 +4,8 @@ OAH_NAMESPACE=pramit-d
 OAH_ROOT=${OAH_ROOT:="$HOME"}
 OAH_DIR="$OAH_ROOT/.oah"
 OAH_HOST_SERVER=${OAH_HOST_SERVER:=https://raw.githubusercontent.com}
+OAH_INSTALLER_TMP_FOLDER=$OAH_ROOT/tmp/oah-installer
+OAH_SHELL_REPO=oah-shell
 
 # Global variables
 OAH_INSTALLER_SERVICE="${OAH_HOST_SERVER}/${OAH_NAMESPACE}/oah-installer/master"
@@ -347,7 +349,10 @@ if [  "$OAH_SRC" != "" ]; then
   cp $OAH_SRC/src/bash/oah-* $OAH_DIR/src
   mv $OAH_DIR/src/oah-init.sh $OAH_DIR/bin
 else
-  downloadScripts
+  #downloadScripts
+  oah_stage_folder=$OAH_INSTALLER_TMP_FOLDER/$OAH_SHELL_REPO
+  mv $oah_stage_folder/src/bash/oah-init.sh $OAH_DIR/bin
+  mv $oah_stage_folder/src/bash/oah-* $OAH_DIR/src
 fi
 
 cat <<EOF > $HOME/.ansible.cfg
